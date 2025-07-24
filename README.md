@@ -1,98 +1,113 @@
-🔐 Password Manager (Terminal Version)
-A secure and user-friendly terminal-based password manager built using Python and Tkinter. It includes features like password generation, strength analysis, encrypted vault storage, and a master password system.
+# 🔐 Password Manager 
 
+A secure and interactive password manager built with Python and Tkinter.  
+It includes password generation, strength analysis, encrypted vault storage, and master key protection — all within a clean terminal GUI interface.
 
-✅ Features
-🔑 Master Password Authentication
+---
 
-📊 Password Strength Analyzer
+## 📁 Project Structure
 
-⚙️ Strong Password Generator
+```
+Password_Manager/
+├── pwdanalyze.py           # Main GUI (Tkinter)
+├── password_utils.py       # Password generation & strength analysis
+├── crypto_utils.py         # Master password handling & encryption
+├── vault_utils.py          # Credential vault logic
+├── salt.bin                # Salt for key derivation
+├── key.verifier            # Verifier for master password validation
+└── vault.enc               # Encrypted credentials (auto-generated)
+```
 
-🔐 Encrypted Credential Vault
+---
 
-🖥️ Simple GUI using Tkinter
+## ✅ Features
 
-🔒 AES Encryption with Key Derivation (PBKDF2)
+- 🔑 Master Password Protection  
+- 🔐 AES-Encrypted Vault (Fernet)  
+- 📊 Password Strength Analysis  
+- 🔄 Strong Password Generator  
+- 📁 Save & View Credentials  
+- 🖥️ Clean GUI using Tkinter  
 
-🚀 Getting Started
-Prerequisites
-Python 3.8 or above
+---
 
-Required Python packages (install using pip):
+## 🛠️ Getting Started
 
-bash
-Copy
-Edit
+### Prerequisites
+
+- Python 3.8+
+- Required libraries:
+
+```bash
 pip install cryptography
-Run the Application
-bash
-Copy
-Edit
+```
+
+---
+
+### 🚀 Running the App
+
+```bash
 python pwdanalyze.py
-On first run, you'll be prompted to set a master password. This password will be required every time you launch the app.
+```
 
-🔧 Functional Overview
-1. Master Key Screen
-Prompts user for the master password on startup.
+- On **first launch**, you’ll be prompted to create a master password.
+- On **subsequent launches**, you'll need to enter the master password to access the vault.
 
-2. Main Menu
-Save Credentials
-Store website, username, and password securely in the encrypted vault.
+---
 
-Generate / Analyze Password
-Create strong passwords or test existing ones for complexity.
+## 🧭 Functionality Overview
 
-View Credentials
-View stored credentials in a readable format (after authentication).
+### 🔐 Master Key Entry  
+Securely authenticates the user using a hashed and encrypted verifier.
+  
+### 🏠 Main Menu  
+- **Save Credentials**  
+  Input and store credentials (website, email/username, password) securely.
 
-Exit
-Securely close the app.
+- **Generate / Analyze Password**  
+  Create strong passwords and analyze the strength of existing ones.
 
-🔐 Security Details
-Vault data is encrypted using AES (via Fernet from the cryptography library).
+- **View Saved Credentials**  
+  Displays previously saved credentials in a readable, decrypted format.
 
-Master password is never stored directly; a derived key is verified using a salted hash.
+- **Exit**  
+  Securely closes the app.
 
-Password vault and verification data are stored in:
+---
 
-vault.enc – Encrypted vault data
+## 🔒 Security Details
 
-salt.bin – Used in key derivation
+- Uses `cryptography.Fernet` (AES under the hood) for vault encryption.
+- Master password is never stored — a derived key is used to validate identity via encrypted verifier.
+- Key derivation is handled using PBKDF2HMAC with a unique salt.
+- Files involved in securing your data:
+  - `salt.bin` — Salt used to derive encryption key
+  - `key.verifier` — Used to verify master password securely
+  - `vault.enc` — Stores your encrypted credentials
 
-key.verifier – Stores encrypted verifier string
+---
 
-🧪 Example Use Case
-Launch app via terminal
-python pwdanalyze.py
+## ⚠️ Important Notes
 
-Enter master password or create one on first run.
+- ❌ No `.exe` or standalone executable — **runs directly via Python in terminal**.
+- 💾 All data is stored **locally**, nothing is sent to the cloud.
+- 🧨 If you delete `salt.bin` or `key.verifier`, you may **lose access permanently** to your stored credentials.
 
-Choose to:
+---
 
-Generate and save new credentials
+## 💡 Possible Future Additions
 
-Analyze password strength
+- 🔄 Cloud backup (encrypted)  
+- 🌐 Browser integration  
+- 🧪 Breach check with HaveIBeenPwned API  
+- 📟 Full CLI-only version  
 
-View saved credentials securely
+---
 
-📝 Notes
-This app does not create a .exe file or standalone installer.
+## 🛡️ Disclaimer
 
-Meant to be run directly from the terminal using Python.
+This project is built for educational and personal use.  
+It is **not meant for enterprise-grade production environments**.  
+Use at your own risk.
 
-All credentials are stored locally and are encrypted.
-
-Do not delete the salt.bin or key.verifier files or you will lose access.
-
-💡 Future Enhancements
-Auto-fill browser integration
-
-Cloud sync with optional encryption key
-
-Password breach check via APIs
-
-CLI-only mode for headless use
-
-🛡️ Disclaimer
-This is a personal/educational project and not intended for enterprise-grade use. Use at your own risk.
+---
